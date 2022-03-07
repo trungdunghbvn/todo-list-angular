@@ -9,19 +9,24 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class AddTodoComponent implements OnInit {
 
+  @Input() todoName: string | undefined;
 
-  @Input() text: string | undefined;
+  @Input()
+  isUpdate: boolean = false;
 
   @Output() updateText = new EventEmitter<string>();
+
+  @Output() addTodoFn = new EventEmitter<any>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  modelChangeFn(value: string): void {
-    console.log(value);
+  changeTodo(value: string): void {
+    this.updateText.emit(value);
   }
+
   addTodo(): void {
-    this.updateText.emit(this.text);
+    this.addTodoFn.emit();
   }
 }

@@ -1,1 +1,8 @@
-<p>list-todo works!</p>
+<div class="todo">
+  <h2>List todo</h2>
+  <div class="list-todo">
+    <div class="list-todo__item" *ngFor="let todo of listTodo; index as i" (click)="update(todo)">
+      {{todo.name}}
+    </div>
+  </div>
+</div>

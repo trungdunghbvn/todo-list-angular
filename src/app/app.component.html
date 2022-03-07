@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Todo List</h1>
-  <app-add-todo [text]="text" (updateText)="getTextChange($event)"></app-add-todo>
+  <app-add-todo [todoName]="todoName" (updateText)="getTextChange($event)" (addTodoFn)="addTodo()"
+    [isUpdate]="isUpdate"></app-add-todo>
+  <app-list-todo [listTodo]="listTodo" (updateTodo)="updateTodo($event)"></app-list-todo>
 </div>
-
