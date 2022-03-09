@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
+import { TodoService } from '../Services/todo.service';
 
 @Component({
   selector: 'app-add-todo',
@@ -18,9 +19,13 @@ export class AddTodoComponent implements OnInit {
 
   @Output() addTodoFn = new EventEmitter<any>();
 
-  constructor() {}
+  public counter  = 0;
 
-  ngOnInit(): void {}
+  constructor(private todo: TodoService) {}
+
+  ngOnInit(): void {
+    this.counter = this.todo.counter;
+  }
 
   changeTodo(value: string): void {
     this.updateText.emit(value);
