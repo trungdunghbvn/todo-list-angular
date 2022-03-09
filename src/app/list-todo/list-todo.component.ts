@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 
@@ -18,9 +18,7 @@ export class ListTodoComponent implements OnInit {
 
   @Output() updateTodo = new EventEmitter<object>();
 
-  constructor(private el: ElementRef) {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 
