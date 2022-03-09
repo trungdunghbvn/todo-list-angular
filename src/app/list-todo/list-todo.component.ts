@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../state/app.state';
+import { editTodo } from '../state/todos/todo.actions';
+import { getListTodos } from '../state/todos/todo.selectors';
+import { Todo } from '../state/todos/todo.model';
 
-export class Todo {
-  name: string | undefined;
-  id: string | undefined;
-}
 
 @Component({
   selector: 'app-list-todo',
@@ -13,16 +13,16 @@ export class Todo {
   styleUrls: ['./list-todo.component.scss'],
 })
 export class ListTodoComponent implements OnInit {
+  todos$!: Observable<Todo[]>;
 
-  @Input() listTodo!: Array<Todo>;
+  constructor(private store: Store<AppState>) {}
 
-  @Output() updateTodo = new EventEmitter<object>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  update(todo: object): void {
-    this.updateTodo.emit(todo);
+  ngOnInit(): void {
+    this.todos$ = this.store.select(getListTodos)
   }
+
+  update(todo: any): void {
+    this.store.dispatch(editTodo({todo: todo}));
+  }
+
 }

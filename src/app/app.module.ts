@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
 
+import { StoreModule } from '@ngrx/store';
+import { todoReducer } from './state/todos/todo.reducer';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    AddTodoComponent,
-    ListTodoComponent,
+  declarations: [AppComponent, AddTodoComponent, ListTodoComponent],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    StoreModule.forRoot({ todos: todoReducer }),
   ],
-  imports: [BrowserModule, ReactiveFormsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,6 @@
 <div class="form_todo">
-  <input type="text" [(ngModel)]="todoName" (ngModelChange)="changeTodo($event)" />
-  <button class="" type="button" (click)="addTodo()" [disabled]="!todoName">{{isUpdate ? 'Update' : 'Add'}}</button>
+  <div>{{todoName$ | async}}</div>
+  <input type="text" [(ngModel)]="value"/>
+  <button class="" type="button" (click)="addTodo()" [disabled]="!value">{{(isUpdate$ | async) ? 'Update' :
+    'Add'}}</button>
 </div>
