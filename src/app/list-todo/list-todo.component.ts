@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../state/app.state';
-import { editTodo } from '../state/todos/todo.actions';
+import { editTodo, getListTodoAction } from '../state/todos/todo.actions';
 import { getListTodos } from '../state/todos/todo.selectors';
 import { Todo } from '../state/todos/todo.model';
 
@@ -18,7 +18,8 @@ export class ListTodoComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.todos$ = this.store.select(getListTodos)
+    this.todos$ = this.store.select(getListTodos);
+    this.store.dispatch(getListTodoAction());
   }
 
   update(todo: any): void {

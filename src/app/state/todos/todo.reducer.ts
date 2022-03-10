@@ -1,5 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import { addTodo, editTodo } from './todo.actions';
+import {
+  addTodo,
+  updateTodo,
+  editTodo,
+  getListTodoSuccess,
+  updateTodoSuccess
+} from './todo.actions';
 import { Todo } from './todo.model';
 
 export interface TodoState {
@@ -21,19 +27,20 @@ export const todoReducer = createReducer(
   initialState,
   // Add the new todo to the todos array
   on(addTodo, (state, { content }) => {
-    if (state.todoId) {
-      const newTodo = state.todos.map((todo) =>
-        state.todoId === todo.id ? { id: state.todoId, content: content } : todo
-      );
-      return {
-        ...state,
-        todos: newTodo,
-        todoId: '',
-      };
-    }
     return {
       ...state,
       todos: [...state.todos, { id: Date.now().toString(), content: content }],
+      todoId: '',
+    };
+  }),
+
+  on(updateTodo, (state, { todo }) => {
+    const newTodo = state.todos.map((item) =>
+      todo.id === item.id ? todo : item
+    );
+    return {
+      ...state,
+      todos: newTodo,
       todoId: '',
     };
   }),
@@ -43,6 +50,19 @@ export const todoReducer = createReducer(
       ...state,
       todoName: todo.content,
       todoId: todo.id,
+    };
+  }),
+
+  on(getListTodoSuccess, (state, result) => {
+    return {
+      ...state,
+      todos: result.response,
+    };
+  }),
+
+  on(updateTodoSuccess, (state, result) => {
+    return {
+      ...state,
     };
   })
 );

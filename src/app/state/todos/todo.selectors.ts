@@ -14,6 +14,11 @@ export const getTodoName = createSelector(
   (state: TodoState) => state.todoName
 );
 
+export const getTodoId = createSelector(
+  selectTodos,
+  (state: TodoState) => state.todoId
+);
+
 export const isUpdateTodo = createSelector(selectTodos, (state: TodoState) => {
   if (state.todoId) {
     return true;

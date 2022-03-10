@@ -38,7 +38,9 @@ export class AppComponent {
 
   listTodo: Array<Todo> = [];
 
-  constructor() {}
+  constructor() {
+    console.log('hello1234');
+  }
 
   getTextChange(text: string) {
     this.todoName = text;

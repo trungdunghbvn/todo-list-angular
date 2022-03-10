@@ -1,5 +1,4 @@
 <div class="form_todo">
-  <div>{{todoName$ | async}}</div>
   <input type="text" [(ngModel)]="value"/>
   <button class="" type="button" (click)="addTodo()" [disabled]="!value">{{(isUpdate$ | async) ? 'Update' :
     'Add'}}</button>
