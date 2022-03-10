@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
+import { Store } from '@ngrx/store';
+import { getTodoName, isUpdateTodo } from '../state/todos/todo.selectors';
+import { addTodo } from '../state/todos/todo.actions';
+import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'app-add-todo',
@@ -8,25 +11,21 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./add-todo.component.scss'],
 })
 export class AddTodoComponent implements OnInit {
+  todoName$!: Observable<string>;
+  isUpdate$!: Observable<boolean>;
+  value!: string;
 
-  @Input() todoName: string | undefined;
+  constructor(private store: Store<AppState>) {}
 
-  @Input()
-  isUpdate: boolean = false;
-
-  @Output() updateText = new EventEmitter<string>();
-
-  @Output() addTodoFn = new EventEmitter<any>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  changeTodo(value: string): void {
-    this.updateText.emit(value);
+  ngOnInit(): void {
+    this.store.select(getTodoName).subscribe((data) => {
+      this.value = data;
+    });
+    this.isUpdate$ = this.store.select(isUpdateTodo)
   }
 
   addTodo(): void {
-    this.addTodoFn.emit();
+    this.store.dispatch(addTodo({content: this.value}));
+    this.value = '';
   }
 }

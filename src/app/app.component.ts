@@ -44,7 +44,7 @@ export class AppComponent {
     this.todoName = text;
   }
 
-  addTodo() {
+  addTodoFn() {
     let todoObj = new Todo();
 
     todoObj.name = this.todoName;
