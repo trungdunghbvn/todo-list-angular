@@ -11,16 +11,31 @@ import { ListTodoComponent } from './list-todo/list-todo.component';
 
 import { StoreModule } from '@ngrx/store';
 import { todoReducer } from './state/todos/todo.reducer';
+import { ProfileComponent } from './profile/profile.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeroesModule } from './heroes/heroes.module';
+
+import { CrisisListComponent } from './crisis-list/crisis-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, AddTodoComponent, ListTodoComponent],
+  declarations: [
+    AppComponent,
+    AddTodoComponent,
+    ListTodoComponent,
+    CrisisListComponent,
+    PageNotFoundComponent,
+    ProfileComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot({ todos: todoReducer }),
-    EffectsModule.forRoot([TodoEffects])
+    EffectsModule.forRoot([TodoEffects]),
+    HeroesModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
