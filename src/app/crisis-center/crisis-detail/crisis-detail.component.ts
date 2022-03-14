@@ -3,32 +3,32 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { HeroService } from '../hero.service';
-import { Hero } from '../hero';
+import { CrisisService } from '../crisis.service';
+import { Crisis } from '../crisis';
 
 @Component({
   selector: 'app-hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css'],
+  templateUrl: './crisis-detail.component.html',
+  styleUrls: ['./crisis-detail.component.css'],
 })
-export class HeroDetailComponent implements OnInit {
-  hero$!: Observable<Hero>;
+export class CrisisDetailComponent implements OnInit {
+  crisis$!: Observable<Crisis>;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: HeroService
+    private service: CrisisService
   ) {}
 
   ngOnInit() {
-    this.hero$ = this.route.paramMap.pipe(
+    this.crisis$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        return this.service.getHero(params.get('id')!)
+        return this.service.getCrise(params.get('id')!)
       } )
     );
   }
 
-  gotoHeroes(hero: Hero) {
+  gotoHeroes(hero: Crisis) {
     const heroId = hero ? hero.id : null;
     // Pass along the hero id if available
     // so that the HeroList component can select that hero.

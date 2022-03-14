@@ -3,6 +3,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { TodoEffects } from './state/todos/effects';
 
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { HeroesModule } from './heroes/heroes.module';
 
 import { CrisisListComponent } from './crisis-list/crisis-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CrisisCenterModule } from './crisis-center/crisis-center.module';
 
 @NgModule({
   declarations: [
@@ -25,16 +28,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ListTodoComponent,
     CrisisListComponent,
     PageNotFoundComponent,
-    ProfileComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot({ todos: todoReducer }),
     EffectsModule.forRoot([TodoEffects]),
     HeroesModule,
+    CrisisCenterModule,
     AppRoutingModule
   ],
   providers: [],

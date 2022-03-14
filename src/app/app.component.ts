@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ChildrenOutletContexts } from '@angular/router';
+import { slideInAnimation } from './animations';
 
 export class Todo {
   name: string | undefined;
@@ -29,6 +31,7 @@ function guidGenerator() {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [slideInAnimation],
 })
 export class AppComponent {
   title = 'todo-list';
@@ -38,7 +41,7 @@ export class AppComponent {
 
   listTodo: Array<Todo> = [];
 
-  constructor() {
+  constructor(private contexts: ChildrenOutletContexts) {
     console.log('hello1234');
   }
 
@@ -70,5 +73,11 @@ export class AppComponent {
     this.todoName = todo?.name;
     this.todoId = todo?.id;
     this.isUpdate = true;
+  }
+
+  getAnimationData() {
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
   }
 }

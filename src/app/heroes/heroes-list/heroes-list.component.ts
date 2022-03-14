@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { switchMap } from 'rxjs/operators';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -7,18 +10,29 @@ import { MessageService } from '../message.service';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes-list.component.html',
-  styleUrls: ['./heroes-list.component.scss']
+  styleUrls: ['./heroes-list.component.scss'],
 })
 export class HeroListComponent implements OnInit {
+  heroes$!: Observable<Hero[]>;
+  selectedId = 0;
 
   selectedHero?: Hero;
 
   heroes: Hero[] = [];
 
-  constructor(private heroService: HeroService, private messageService: MessageService) { }
+  constructor(
+    private heroService: HeroService,
+    private messageService: MessageService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.heroes$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        this.selectedId = parseInt(params.get('id')!, 10);
+        return this.heroService.getHeroes();
+      })
+    );
   }
 
   onSelect(hero: Hero): void {
@@ -27,11 +41,9 @@ export class HeroListComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
