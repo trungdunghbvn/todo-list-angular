@@ -41,9 +41,7 @@ export class AppComponent {
 
   listTodo: Array<Todo> = [];
 
-  constructor(private contexts: ChildrenOutletContexts) {
-    console.log('hello1234');
-  }
+  constructor(private contexts: ChildrenOutletContexts) {}
 
   getTextChange(text: string) {
     this.todoName = text;

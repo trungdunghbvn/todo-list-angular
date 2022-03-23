@@ -1,0 +1,26 @@
+<h2>Login</h2>
+<p>{{message}}</p>
+<form *ngIf="!authService.isLoggedIn" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="first-name">First Name: </label>
+    <input id="first-name" type="text" formControlName="email" class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['email'].errors}">
+  </div>
+
+  <div class="form-group">
+    <label for="last-name">Last Name: </label>
+    <input id="last-name" type="text" formControlName="password" class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['password'].errors}">
+  </div>
+  <p>Complete the form to enable button.</p>
+  <div class="form-group">
+    <button type="submit" [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Login
+    </button>
+    <!-- <a routerLink="/register" class="btn btn-link">Register</a> -->
+  </div>
+</form>
+<p>
+  <button type="button" (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+</p>

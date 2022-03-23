@@ -1,18 +1,12 @@
-<div class="container">
-  <!-- <h1>Todo List</h1>
-  <app-add-todo (addTodoFn)="addTodoFn()"></app-add-todo>
-  <app-list-todo (updateTodo)="updateTodo($event)"></app-list-todo> -->
-
-  <h1>Angular Router Sample</h1>
-  <nav>
-    <a class="button" routerLink="/crisis-center" routerLinkActive="activebutton">Crisis Center</a> |
-    <a class="button" routerLink="/heroes" routerLinkActive="activebutton">Heroes</a>
-  </nav>
-
-  <h2>Routing with Custom Matching</h2>
-
-  <div [@routeAnimation]="getAnimationData()">
-    <router-outlet></router-outlet>
-  </div>
-
+<h1 class="title">Angular Router</h1>
+<nav>
+  <a routerLink="/crisis-center" routerLinkActive="active">Crisis Center</a>
+  <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+  <a routerLink="/admin" routerLinkActive="active">Admin</a>
+  <a routerLink="/login" routerLinkActive="active">Login</a>
+  <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
+</nav>
+<div [@routeAnimation]="getAnimationData()">
+  <router-outlet></router-outlet>
 </div>
+<router-outlet name="popup"></router-outlet>

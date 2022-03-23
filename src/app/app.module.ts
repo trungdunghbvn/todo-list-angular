@@ -17,20 +17,23 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeroesModule } from './heroes/heroes.module';
 
-import { CrisisListComponent } from './crisis-list/crisis-list.component';
+// import { CrisisListComponent } from './crisis-list/crisis-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CrisisCenterModule } from './crisis-center/crisis-center.module';
 import { NameEditorComponent } from './name-editor/name-editor.component';
+
+import { AdminModule } from './admin/admin.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTodoComponent,
     ListTodoComponent,
-    CrisisListComponent,
+    // CrisisListComponent,
     PageNotFoundComponent,
     ProfileComponent,
-    NameEditorComponent
+    NameEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +44,11 @@ import { NameEditorComponent } from './name-editor/name-editor.component';
     StoreModule.forRoot({ todos: todoReducer }),
     EffectsModule.forRoot([TodoEffects]),
     HeroesModule,
+
+    AuthModule,
+    AdminModule,
     CrisisCenterModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

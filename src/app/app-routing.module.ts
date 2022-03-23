@@ -3,15 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CrisisListComponent } from './crisis-list/crisis-list.component';
 import { NameEditorComponent } from './name-editor/name-editor.component';
-// import { HeroListComponent } from './heroes/heroes-list/heroes-list.component';
+import { HeroListComponent } from './heroes/heroes-list/heroes-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  { path: 'crisis-center', component: CrisisListComponent },
   { path: 'name-editor', component: NameEditorComponent },
-  // { path: 'heroes',        component: HeroListComponent },
-  { path: '',   redirectTo: '/heroes', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'heroes',        component: HeroListComponent },
+  { path: '', redirectTo: '/heroes', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -19,10 +19,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
